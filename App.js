@@ -1,9 +1,9 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, FlatList } from "react-native";
-import HomeScreen from "./src/screens/HomeScreen";
-import CoinDetailedScreen from "./src/screens/CoinDetailedScreen";
+import WatchlistProvider from "./src/context/WatchlistContext";
 import { NavigationContainer } from "@react-navigation/native";
 import Navigation from "./src/navigation";
+import { RecoilRoot } from "recoil";
 
 export default function App() {
   return (
@@ -14,10 +14,14 @@ export default function App() {
         },
       }}
     >
-      <View style={styles.container}>
-        <StatusBar backgroundColor="white" />
-        <Navigation />
-      </View>
+      <RecoilRoot>
+        <WatchlistProvider>
+          <View style={styles.container}>
+            <StatusBar backgroundColor="white" />
+            <Navigation />
+          </View>
+        </WatchlistProvider>
+      </RecoilRoot>
     </NavigationContainer>
   );
 }

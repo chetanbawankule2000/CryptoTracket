@@ -1,9 +1,10 @@
 import { View, Text } from "react-native";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Entypo, FontAwesome } from "@expo/vector-icons";
+import { Entypo, FontAwesome, Foundation } from "@expo/vector-icons";
 import HomeScreen from "../screens/HomeScreen/";
 import WatchListScreen from "../screens/WatchListScreen";
+import PortFolioScreen from "../screens/PortFolioScreen";
 
 const Tab = createBottomTabNavigator();
 const BottomTabNavigation = () => {
@@ -25,6 +26,19 @@ const BottomTabNavigation = () => {
         options={{
           tabBarIcon: ({ focused, color }) => (
             <Entypo name="home" size={focused ? 30 : 25} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="PortFolio"
+        component={PortFolioScreen}
+        options={{
+          tabBarIcon: ({ focused, color }) => (
+            <Foundation
+              name="graph-pie"
+              size={focused ? 35 : 30}
+              color={color}
+            />
           ),
         }}
       />

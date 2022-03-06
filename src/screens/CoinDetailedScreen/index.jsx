@@ -36,7 +36,7 @@ const CoinDetailedScreen = () => {
     setCoinMarketData(coinmarketdata);
     setUsdValue(coinData.market_data.current_price.usd.toString());
     setLoading(false);
-    console.log(coinmarketdata);
+    // console.log(coinmarketdata);
   };
 
   useEffect(async () => {
@@ -53,6 +53,7 @@ const CoinDetailedScreen = () => {
     );
   }
   const {
+    id,
     image: { small },
     name,
     symbol,
@@ -95,6 +96,7 @@ const CoinDetailedScreen = () => {
         <CoinDetailsHeader
           image={small}
           symbol={symbol}
+          coinId={id}
           marketCapRank={market_cap_rank}
         />
         <View style={styles.priceContainer}>

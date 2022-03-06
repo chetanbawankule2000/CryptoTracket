@@ -51,3 +51,37 @@ export const getCoinMarketData = async (page_number = 1) => {
     console.log(e);
   }
 };
+export const getWatchListedCoin = async (page_number, coinIds) => {
+  console.log(page_number, "request page");
+  try {
+    //const response = await axios.get(`${COINDETAIL}/markets`, {
+    //   params: {
+    //     vs_currency: "usd",
+    //     ids: coinIds,
+    //     order: "market_cap_desc",
+    //     per_page: 50,
+    //     page: page_number,
+    //     sparkline: false,
+    //     price_change_percentage: "24h",
+    //   },
+    // });
+    // console.log("response is ", response.data);
+    const response = await axios.get(
+      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coinIds}&order=market_cap_desc&per_page=50&page=${page_number}&sparkline=false&price_change_percentage=24h`
+    );
+    return response.data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getAllCoins = async () => {
+  try {
+    const response = await axios.get(
+      `https://api.coingecko.com/api/v3/coins/list?include_platform=false`
+    );
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
