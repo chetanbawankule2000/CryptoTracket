@@ -20,12 +20,12 @@ export const getCoinDetailData = async (coinId) => {
   }
 };
 
-export const getCoinMarketChart = async (coinId) => {
+export const getCoinMarketChart = async (coinId, selectedRange) => {
   try {
     const response = await axios.get(`${COINDETAIL}/${coinId}/market_chart`, {
       params: {
         vs_currency: "usd",
-        days: 1,
+        days: selectedRange,
         interval: "hourly",
       },
     });
@@ -52,7 +52,7 @@ export const getCoinMarketData = async (page_number = 1) => {
   }
 };
 export const getWatchListedCoin = async (page_number, coinIds) => {
-  console.log(page_number, "request page");
+  // console.log(page_number, "request page");
   try {
     //const response = await axios.get(`${COINDETAIL}/markets`, {
     //   params: {
@@ -83,5 +83,16 @@ export const getAllCoins = async () => {
     return response.data;
   } catch (err) {
     console.log(err);
+  }
+};
+
+export const getCandleChartData = async (coinId, days = 1) => {
+  try {
+    const response = await axios.get(
+      `https://api.coingecko.com/api/v3/coins/${coinId}/ohlc?vs_currency=usd&days=${days}`
+    );
+    return response.data;
+  } catch (e) {
+    console.log(e);
   }
 };

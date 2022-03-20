@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     padding: 15,
+    backgroundColor: "#121212",
   },
   coinContainer: {
     flexDirection: "row",

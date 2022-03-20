@@ -2,9 +2,10 @@ import { View, Text, FlatList, ActivityIndicator, LogBox } from "react-native";
 import React, { Suspense } from "react";
 import PortFolioAssetsList from "./components/PortFolioAssetsList";
 // Ignore log notification by message:
-// LogBox.ignoreLogs(["Warning: ..."]);
+LogBox.ignoreLogs(["Warning: ..."]);
+
 // Ignore all log notifications:
-// LogBox.ignoreAllLogs();
+LogBox.ignoreAllLogs();
 const PortFolioScreen = () => {
   return (
     <View style={{ flex: 1 }}>
@@ -13,7 +14,7 @@ const PortFolioScreen = () => {
           <ActivityIndicator
             size={"large"}
             color={"white"}
-            style={{ alignSelf: "center" }}
+            style={{ alignItems: "center", justifyContent: "center" }}
           />
         }
       >

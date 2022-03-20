@@ -30,7 +30,7 @@ const PortFolioAssetItem = ({ assetItem }) => {
           <Text style={styles.ticker}>{ticker}</Text>
         </View>
       </View>
-      <View style={{ alignItems: "flex-start" }}>
+      <View style={{ alignItems: "flex-end" }}>
         <Text style={styles.title}>${currentPrice}</Text>
         <View style={styles.percentageChangeContainer}>
           <AntDesign

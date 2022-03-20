@@ -7,6 +7,7 @@ import { allPortfolioBoughtAssetsInStorage } from "../../atoms/PortFolioAssets";
 import { getAllCoins, getCoinDetailData } from "../../services/requests";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
+import uuid from "react-native-uuid";
 
 const AddNewAssetScreen = () => {
   const navigation = useNavigation();
@@ -20,7 +21,7 @@ const AddNewAssetScreen = () => {
   const [selectedCoinId, setSelectedCoinId] = useState(null);
   const [selectedCoin, setSelectedCoin] = useState(null);
 
-  console.log(selectedCoin);
+  // console.log(selectedCoin);
 
   const isQuantityEntred = () => boughtAssetQuantity === "";
 
@@ -57,6 +58,7 @@ const AddNewAssetScreen = () => {
   const onAddNewAsset = async () => {
     const newAsset = {
       id: selectedCoin.id,
+      unique_id: selectedCoin.id + uuid.v4(),
       name: selectedCoin.name,
       image: selectedCoin.image.small,
       ticker: selectedCoin.symbol.toUpperCase(),

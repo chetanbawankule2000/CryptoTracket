@@ -11,13 +11,13 @@ import { useWatchList } from "../../context/WatchlistContext";
 import { getWatchListedCoin } from "../../services/requests";
 const WatchListScreen = () => {
   const { watchListCoinIds } = useWatchList();
-  console.log("length is ", watchListCoinIds.length);
+  // console.log("length is ", watchListCoinIds.length);
 
   const [coins, setCoins] = useState([]);
   const [loading, setLoading] = useState(null);
 
   const transFormCoinIds = () => watchListCoinIds.join("%2C");
-  console.log(transFormCoinIds());
+  // console.log(transFormCoinIds());
   const fetchWatchListedCoin = async () => {
     if (loading) {
       return;
@@ -25,7 +25,7 @@ const WatchListScreen = () => {
     setLoading(true);
     let watchListCoin = await getWatchListedCoin(1, transFormCoinIds());
     // setCoins([...coins, ...watchListCoin]);
-    console.log("from api ", watchListCoin);
+    // console.log("from api ", watchListCoin);
     setCoins(watchListCoin);
     setLoading(false);
   };
@@ -36,7 +36,7 @@ const WatchListScreen = () => {
     }
     setCoins(watchListCoinIds);
   }, [watchListCoinIds]);
-  console.log("onWatchlist screen", watchListCoinIds);
+  // console.log("onWatchlist screen", watchListCoinIds);
   if (loading) {
     return (
       <ActivityIndicator

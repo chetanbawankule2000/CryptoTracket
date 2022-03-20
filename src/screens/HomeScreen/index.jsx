@@ -28,7 +28,7 @@ const HomeScreen = () => {
     }
     setLoading(true);
     const coinaMarketData = await getCoinMarketData();
-    console.log("coin data is ", coinaMarketData);
+    // console.log("coin data is ", coinaMarketData);
     setCoins(coinaMarketData);
     setLoading(false);
   };
@@ -38,18 +38,32 @@ const HomeScreen = () => {
   }, []);
 
   return (
-    <FlatList
-      data={coins}
-      renderItem={({ item }) => <CoinItem marketCoin={item} />}
-      onEndReached={() => fetchCoinMarketData(coins.length / 50 + 1)}
-      refreshControl={
-        <RefreshControl
-          refreshing={loading}
-          tintColor="white"
-          onRefresh={refreshCoins}
-        />
-      }
-    />
+    <View>
+      <Text
+        style={{
+          color: "white",
+          fontSize: 25,
+          letterSpacing: 1,
+          paddingHorizontal: 20,
+          paddingBottom: 5,
+          fontFamily: "Inter_900Black",
+        }}
+      >
+        Cryptoassets
+      </Text>
+      <FlatList
+        data={coins}
+        renderItem={({ item }) => <CoinItem marketCoin={item} />}
+        onEndReached={() => fetchCoinMarketData(coins.length / 50 + 1)}
+        refreshControl={
+          <RefreshControl
+            refreshing={loading}
+            tintColor="white"
+            onRefresh={refreshCoins}
+          />
+        }
+      />
+    </View>
   );
 };
 

@@ -1,11 +1,25 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  ActivityIndicator,
+} from "react-native";
 import WatchlistProvider from "./src/context/WatchlistContext";
 import { NavigationContainer } from "@react-navigation/native";
 import Navigation from "./src/navigation";
 import { RecoilRoot } from "recoil";
+import { useFonts, Inter_900Black } from "@expo-google-fonts/inter";
 
 export default function App() {
+  let [fontsLoaded] = useFonts({
+    Inter_900Black,
+  });
+
+  if (!fontsLoaded) {
+    return <ActivityIndicator size={"large"} />;
+  }
   return (
     <NavigationContainer
       theme={{

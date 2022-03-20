@@ -55,6 +55,32 @@ const styles = StyleSheet.create({
     padding: 10,
     marginRight: 10,
   },
+  filterContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    backgroundColor: "#2B2B2B",
+    paddingVertical: 5,
+    borderRadius: 5,
+    marginVertical: 10,
+  },
+  filterText: {
+    color: "white",
+    fontSize: 16,
+  },
+  candleStickText: {
+    color: "white",
+    fontWeight: "700",
+  },
+  candleStickDataContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginHorizontal: 10,
+    marginTop: 20,
+  },
+  candleStickTextLabel: {
+    color: "grey",
+    fontSize: 13,
+  },
 });
 
 export default styles;

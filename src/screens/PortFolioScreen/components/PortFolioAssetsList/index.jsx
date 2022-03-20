@@ -1,15 +1,29 @@
-import { View, Text, FlatList, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  Pressable,
+  TouchableOpacity,
+} from "react-native";
 import React from "react";
 import styles from "./styles";
-import { AntDesign, EvilIcons } from "@expo/vector-icons";
+import { AntDesign, EvilIcons, FontAwesome } from "@expo/vector-icons";
 import PortFolioAssetItem from "../PortFolioAssetItem";
 import { useNavigation } from "@react-navigation/native";
 import { useRecoilValue, useRecoilState } from "recoil";
-import { allPortfolioAssets } from "../../../../atoms/PortFolioAssets";
+import {
+  allPortfolioAssets,
+  allPortfolioBoughtAssetsInStorage,
+} from "../../../../atoms/PortFolioAssets";
+import { SwipeListView } from "react-native-swipe-list-view";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const PortFolioAssetsList = () => {
   const navigation = useNavigation();
   const assets = useRecoilValue(allPortfolioAssets);
+  const [storageAssets, setStorageAssets] = useRecoilState(
+    allPortfolioBoughtAssetsInStorage
+  );
 
   const getCurrentBalance = () =>
     assets.reduce(
@@ -40,10 +54,41 @@ const PortFolioAssetsList = () => {
       (((currentBalance - boughtBalance) / boughtBalance) * 100).toFixed(2) || 0
     );
   };
+
+  const onDeleteAsset = async (asset) => {
+    const newAssets = storageAssets.filter(
+      (coin, index) => coin.unique_id !== asset.item.unique_id
+    );
+    const jsonValue = JSON.stringify(newAssets);
+    await AsyncStorage.setItem("@portfolio_coins", jsonValue);
+    setStorageAssets(newAssets);
+  };
+  const renderDeleteButton = (data) => {
+    return (
+      <TouchableOpacity
+        style={{
+          flex: 1,
+          backgroundColor: "#EA3943",
+          alignItems: "flex-end",
+          justifyContent: "center",
+          paddingRight: 30,
+          marginLeft: 20,
+        }}
+        onPress={() => onDeleteAsset(data)}
+      >
+        <FontAwesome name="trash-o" size={24} color="white" />
+      </TouchableOpacity>
+    );
+  };
   return (
-    <FlatList
+    <SwipeListView
       data={assets}
       renderItem={({ item }) => <PortFolioAssetItem assetItem={item} />}
+      rightOpenValue={-75}
+      disableRightSwipe
+      closeOnRowPress
+      renderHiddenItem={(data) => renderDeleteButton(data)}
+      keyExtractor={({ unique_id }, index) => `${unique_id}${index}`}
       ListHeaderComponent={
         <>
           <View style={styles.listHeaderContainer}>

@@ -6,7 +6,6 @@ import { useNavigation } from "@react-navigation/native";
 import { useWatchList } from "../../../../context/WatchlistContext";
 const CoinDetailsHeader = (props) => {
   const { coinId, image, symbol, marketCapRank } = props;
-  console.log("coinId", coinId);
   const navigation = useNavigation();
   const { watchListCoinIds, storeWatchListCoinId, removeWatchListCoinId } =
     useWatchList();
